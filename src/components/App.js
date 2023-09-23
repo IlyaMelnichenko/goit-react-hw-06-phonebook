@@ -5,22 +5,24 @@ import { PhoneList } from './Phonelist/PhoneList';
 import { Container } from './ContactForm/StyledContactFrom';
 import { useState, useEffect } from 'react';
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+
+
+  
   const [filter, setFilter] = useState('');
 
-  useEffect(() => {
-    const savedContacts = localStorage.getItem('savedContacts');
-    console.log(savedContacts);
-    if (savedContacts !== null) {
-      setContacts(JSON.parse(savedContacts));
-    }
-  }, []);
+  // useEffect(() => {
+  //   const savedContacts = localStorage.getItem('savedContacts');
+  //   console.log(savedContacts);
+  //   if (savedContacts !== null) {
+  //     setContacts(JSON.parse(savedContacts));
+  //   }
+  // }, []);
 
-  useEffect(() => {
-    if (contacts.length !== 0) {
-      localStorage.setItem('savedContacts', JSON.stringify(contacts));
-    }
-  }, [contacts]);
+  // useEffect(() => {
+  //   if (contacts.length !== 0) {
+  //     localStorage.setItem('savedContacts', JSON.stringify(contacts));
+  //   }
+  // }, [contacts]);
 
   const addPhoneCard = newCard => {
     const checkName = newCard.Name;
@@ -41,11 +43,7 @@ export const App = () => {
       contact.Name.toLowerCase().includes(filter.toLowerCase())
     );
 
-  const deleteCard = deleteId => {
-    setContacts(prevState =>
-      prevState.filter(contact => contact.id !== deleteId)
-    );
-  };
+ 
 
   const filtered = getFiltered();
   return (
