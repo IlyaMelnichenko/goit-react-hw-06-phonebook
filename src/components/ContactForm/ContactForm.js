@@ -2,6 +2,8 @@ import { Formik, ErrorMessage } from 'formik';
 import * as Yup from 'yup';
 import { nanoid } from 'nanoid';
 import { StyledForm, StyledFild, AddButton } from './StyledContactFrom';
+import { useDispatch, useSelector } from 'react-redux';
+import { addContact } from 'redux/contactsSlice';
 
 const schema = Yup.object().shape({
   Name: Yup.string()
@@ -16,7 +18,11 @@ const schema = Yup.object().shape({
     .max(20, 'Too Long!'),
 });
 
-export const ContactForm = ({ addPhoneCard }) => {
+export const ContactForm = () => {
+  const contacts= useSelector(state=>state.contacts.items)
+  const dispatch=useDispatch();
+  
+
   return (
     <>
       <Formik
@@ -25,10 +31,24 @@ export const ContactForm = ({ addPhoneCard }) => {
           Number: '',
         }}
         validationSchema={schema}
-        onSubmit={(value,actions) => {
-          addPhoneCard({ ...value, id: nanoid() });
-          actions.resetForm();
+        onSubmit={(values)=>{
+          const checkName = values.Name;
+          console.log(values)
+          if (
+            contacts.some(
+              contact => contact.Name.toLowerCase() === checkName.toLowerCase()
+            )
+          ) {
+            alert(`${checkName} already recorded in the directory`);
+            return;
+          }
+          dispatch(addContact({ id: nanoid(), ...values}));
+          
         }}
+        
+        
+        
+ 
       >
         <StyledForm>
           <label>
