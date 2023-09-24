@@ -19,9 +19,8 @@ const schema = Yup.object().shape({
 });
 
 export const ContactForm = () => {
-  const contacts= useSelector(state=>state.contacts.items)
-  const dispatch=useDispatch();
-  
+  const contacts = useSelector(state => state.contacts.items);
+  const dispatch = useDispatch();
 
   return (
     <>
@@ -31,9 +30,9 @@ export const ContactForm = () => {
           Number: '',
         }}
         validationSchema={schema}
-        onSubmit={(values)=>{
+        onSubmit={values => {
           const checkName = values.Name;
-          console.log(values)
+          console.log(values);
           if (
             contacts.some(
               contact => contact.Name.toLowerCase() === checkName.toLowerCase()
@@ -42,13 +41,8 @@ export const ContactForm = () => {
             alert(`${checkName} already recorded in the directory`);
             return;
           }
-          dispatch(addContact({ id: nanoid(), ...values}));
-          
+          dispatch(addContact({ id: nanoid(), ...values }));
         }}
-        
-        
-        
- 
       >
         <StyledForm>
           <label>

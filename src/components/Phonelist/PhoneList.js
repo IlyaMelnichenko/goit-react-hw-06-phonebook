@@ -1,18 +1,17 @@
-
 import { useSelector } from 'react-redux';
 import { PhoneItem } from '../Phoneitem/PhoneItem';
 import { StyledItem, StyledList } from './StyledPhoneList';
+import { getContacts } from 'redux/contactsSlice';
+import { getFilter } from 'redux/filterSlice';
 
 export const PhoneList = () => {
-  
-    
-  const contacts = useSelector(state=>state.contacts.items);
-  const filter=useSelector(state=>state.filter);
+  const contacts = useSelector(getContacts);
+  const filter = useSelector(getFilter);
   const getFiltered = () =>
     contacts.filter(contact =>
       contact.Name.toLowerCase().includes(filter.toLowerCase())
     );
-    const filteredContacts = getFiltered();
+  const filteredContacts = getFiltered();
   return (
     <StyledList>
       {filteredContacts.map(contact => (

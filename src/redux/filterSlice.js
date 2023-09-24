@@ -9,5 +9,5 @@ export const filterSlice = createSlice({
       
     },
   })
-
+  export const getFilter = state => state.filter;
   export const {changeFilter}=filterSlice.actions;
