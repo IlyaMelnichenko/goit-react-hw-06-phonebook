@@ -2,7 +2,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { StyledFilter } from './StyledFilter';
 import { changeFilter, getFilter } from 'redux/filterSlice';
 
-export const Filter = ({}) => {
+export const Filter = () => {
   const filter = useSelector(getFilter);
   const dispatch = useDispatch();
   return (

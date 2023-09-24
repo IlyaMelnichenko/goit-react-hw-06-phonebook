@@ -1,5 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit'
-import { useSelector } from 'react-redux';
+
 
 export const filterSlice = createSlice({
     name: 'filter',
